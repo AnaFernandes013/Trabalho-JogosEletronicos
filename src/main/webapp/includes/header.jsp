@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trabaio</title>
+      <link rel="stylesheet" href="./css/cadastro.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   </head>
 <body>
@@ -21,10 +22,10 @@
               <a class="nav-link active" aria-current="page" href="index.jsp">Index</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Cadastro.jsp">Cadastrar</a>
+              <a class="nav-link" href="cadastroJogo.jsp">Cadastrar</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="listar.jsp">Listar</a>
+              <a class="nav-link" href="listarJogo.jsp">Listar</a>
             </li>
           </ul>
         </div>

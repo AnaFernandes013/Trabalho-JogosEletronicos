@@ -5,7 +5,7 @@
        <div class="container">
            <div class="container py-5">
                <div class="text-center mb-5">
-                   <h1 class="fw-bold">Meu Trabalinho</h1>
+                   <h1 class="fw-bold"></h1>
                    <p class="text-muted">Uma página simples usando Bootstrap</p>
                </div>
 
