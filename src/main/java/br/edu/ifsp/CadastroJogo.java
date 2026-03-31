@@ -17,7 +17,7 @@ public class CadastroJogo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        // faz a requisição, pega do html o name e joga para as variaveis
         String titulo = request.getParameter("titulo");
         String desenvolvedor = request.getParameter("desenvolvedor");
         String anoLancamento = request.getParameter("ano");
@@ -33,7 +33,7 @@ public class CadastroJogo extends HttpServlet {
 
         List<String> listaMensagens = new ArrayList<>();
 
-        if(titulo == null || titulo.isEmpty()){
+        if(titulo == null || titulo.isEmpty()){ // verifica se cada campo esta vazio ou nao
             listaMensagens.add("Falta o título");
         }
 

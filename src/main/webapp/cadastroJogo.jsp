@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:import url="/includes/header.jsp"/>
+<c:import url="/includes/headerLogin.jsp"/>
 
     <body>
     <div class="container">
@@ -17,17 +17,17 @@
                             <span id="texto">Clique para adicionar imagem</span>
                         </div>
 
-                        <input type="file" id="inputImagem" name="capa" accept="image/*" style="display: none;">
+                        <input type="file" id="inputImagem" name="capa" accept="image/*" style="display: none;" required>
                     </div>
 
-                    <!-- CAMPOS -->
+
                     <div class="col-md-8">
 
-                        <input type="text" name="titulo" class="form-control mb-2" placeholder="Título">
+                        <input type="text" name="titulo" class="form-control mb-2" placeholder="Título" required>
 
-                        <input type="text" name="desenvolvedor" class="form-control mb-2" placeholder="Desenvolvedor">
+                        <input type="text" name="desenvolvedor" class="form-control mb-2" placeholder="Desenvolvedor" required>
 
-                        <input type="number" name="ano" class="form-control mb-2" placeholder="Ano de lançamento">
+                        <input type="number" name="ano" class="form-control mb-2" placeholder="Ano de lançamento" min="1950" max="2026" required>
 
                         <select name="genero" class="form-select mb-2">
                             <option value="">Selecione o genêro</option>
@@ -40,11 +40,11 @@
                             <option value="puzzle">Puzzle</option>
                         </select>
 
-                        <textarea name="sinopse" class="form-control mb-2" placeholder="Sinopse"></textarea>
+                        <textarea name="sinopse" maxlength="200" class="form-control" placeholder="Sinopse"></textarea>
 
-                        <input type="text" name="idioma" class="form-control mb-2" placeholder="Idioma">
+                        <input type="text" name="idioma" class="form-control mb-2" placeholder="Idioma" required>
 
-                        <input type="text" name="plataforma" class="form-control mb-2" placeholder="Plataforma">
+                        <input type="text" name="plataforma" class="form-control mb-2" placeholder="Plataforma" required>
 
                         <select name="classificacao" class="form-select mb-2">
                             <option value="">Selecione a classificação</option>

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:import url="/includes/header.jsp"/>
+<c:import url="/includes/headerLogin.jsp"/>
     <body>
        <div class="container">
        </br>
@@ -58,6 +58,13 @@
                 </tr>
                </c:forEach>
             </table>
+           <c:if test="${not empty resultados}">
+               <h3>Resultados da busca:</h3>
 
+               <c:forEach var="j" items="${resultados}">
+                   <p>${j.titulo}</p>
+               </c:forEach>
+           </c:if>
        </div>
+       <script src="js/busca.js"></script>
 <c:import url="/includes/footer.jsp"/>
