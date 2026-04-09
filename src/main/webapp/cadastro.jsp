@@ -47,5 +47,5 @@
         </div>
     </div>
 </section>
-<!-- Pills content -->
+
 <c:import url="/includes/footer.jsp"/>

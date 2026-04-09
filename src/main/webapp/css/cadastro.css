@@ -7,14 +7,17 @@
 
 .capa {
     width: 100%;
-    aspect-ratio: 2 / 3; /* formato de capa de jogo */
+    aspect-ratio: 3 / 4; /* formato de capa de jogo */
     border: 1px solid black;
+    object-fit: cover;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     cursor: pointer;
 }
+
+
 
 .capa:hover {
     background-color: #f5f5f5;
