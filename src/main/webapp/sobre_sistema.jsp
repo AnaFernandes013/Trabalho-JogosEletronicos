@@ -9,6 +9,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/includes/headerLogin.jsp"/>
 
+<!--se o usuario digitou algo param.termo(valor que veio do formulário)-->
+<c:if test="${not empty param.termo}">
+    <h3>Resultados da busca:</h3>
+
+    <c:if test="${empty resultados}">
+        <p>Nenhum jogo encontrado</p>
+    </c:if>
+
+    <c:forEach var="j" items="${resultados}">
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+
+            <div class="card h-100">
+
+                <img src="imagens/${j.capa}" class="card-img-top" alt="Capa do jogo">
+
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">${j.titulo}</h5>
+
+                    <p class="card-text">${j.sinopse}</p>
+
+                    <form action="ver_jogo" method="get">
+                        <input type="hidden" name="id" value="${j.id}">
+                        <button type="submit" class="btn btn-primary mt-auto">Veja mais</button>
+                    </form>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </c:forEach>
+</c:if>
+
+
+
 <div class="cont">
     <h1>️ Sobre o Sistema</h1>
 
@@ -56,9 +92,8 @@
         <h2> Página Inicial</h2>
         <p>Na página inicial (Home), são exibidos:</p>
         <ul>
-            <li>Jogos em destaque</li>
             <li>Lançamentos recentes</li>
-            <li>Novidades e promoções</li>
+            <li>Jogos</li>
         </ul>
         <p>
             Essa organização facilita a navegação e melhora a experiência do usuário.

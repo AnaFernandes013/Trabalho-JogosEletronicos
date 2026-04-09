@@ -2,9 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/includes/headerLogin.jsp"/>
 
-    <body>
-    <div class="container">
-        <div class="container-form">
+        <div class="container">
             <h3 class="text-center mb-4">Cadastro de jogos</h3>
 
             <form action="cadastrar_jogo" method="post" enctype="multipart/form-data">
@@ -41,10 +39,16 @@
                         </select>
 
                         <textarea name="sinopse" maxlength="200" class="form-control" placeholder="Sinopse"></textarea>
-
+                        <br>
                         <input type="text" name="idioma" class="form-control mb-2" placeholder="Idioma" required>
 
-                        <input type="text" name="plataforma" class="form-control mb-2" placeholder="Plataforma" required>
+                        <select name="plataforma" class="form-select mb-2">
+                            <option value="">Selecione a plataforma</option>
+                            <option value="pc">PC</option>
+                            <option value="playstation">Playstation</option>
+                            <option value="xbox">Xbox</option>
+                            <option value="nintendo">Nintendo Switch</option>
+                        </select>
 
                         <select name="classificacao" class="form-select mb-2">
                             <option value="">Selecione a classificação</option>
@@ -56,13 +60,13 @@
                             <option value="18">18 anos</option>
                         </select>
 
-                        <button type="submit" class="btn btn-dark mt-2">Cadastrar</button>
+                        <button type="submit" class="btn btn-primary mt-2">Cadastrar</button>
                     </div>
 
                 </div>
             </form>
         </div>
-    </div>
 
-    <script src="js/cadastro.js"></script>
+
+    <script src="js/imagem.js"></script>
 <c:import url="/includes/footer.jsp"/>

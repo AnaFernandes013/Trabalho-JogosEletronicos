@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trabaio</title>
-      <link rel="stylesheet" href="./css/estilos.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="./css/estilos.css">
   </head>
 <body>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd !important;" data-bs-theme="light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.jsp">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,8 +30,10 @@
                 </li>
             </ul>
             <form class="d-flex" role="search" action="buscar" method="get">
-                <input class="form-control me-2" type="search" name="termo" placeholder="Search" aria-label="Buscar Jogo"/>
-                <button class="btn btn-outline-success" type="submit">Busca</button>
+                <input class="form-control me-2" type="search" name="termo" placeholder="Search" />
+                <!--Para enviar para a mesma página sempre o ideal é fazer isso daqui!--->
+                <input type="hidden" name="origem" value="${pageContext.request.requestURI}">
+                <button class="btn-primary" type="submit">Busca</button>
             </form>
         </div>
     </div>
