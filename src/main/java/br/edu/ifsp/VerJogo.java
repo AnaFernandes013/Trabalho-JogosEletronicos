@@ -11,16 +11,30 @@ public class VerJogo extends HttpServlet {
 
 
     public static List<Jogo> lista = null;
+    public static List<Comentario> listaComentarios = null;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
 
         List<Jogo> lista = (List<Jogo>) getServletContext().getAttribute("lista");
+        List<Comentario> listaComentarios = (List<Comentario>) getServletContext().getAttribute("comentarios");
 
         for (Jogo j : lista) {
             if (String.valueOf(j.getId()).equals(id)) {
+
                 request.setAttribute("jogo", j);
+
+                List<Comentario> comentariosDoJogo = new ArrayList<>();
+
+                for (Comentario c : listaComentarios) {
+                    if (c.getJogo().getId() == j.getId()) {
+                        comentariosDoJogo.add(c);
+                    }
+                }
+
+                request.setAttribute("comentarios", comentariosDoJogo);
+
                 break;
             }
         }
