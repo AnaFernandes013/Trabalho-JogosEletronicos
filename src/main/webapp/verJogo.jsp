@@ -47,8 +47,28 @@
 
     </br>
     </br>
-    <h5>Comentarios</h5>
-    <p>TESTEE TESTANDOOO</p>
+
+    <div class="container">
+        <h5>Comentários</h5>
+
+            <div>
+                 <c:forEach var="c" items="${jogo.comentarios}">
+                     <div class="mb-2 p-2 border rounded">
+                         <strong>${c.usuario.usuario}</strong>
+                         <p>${c.texto   }</p>
+                     </div>
+                 </c:forEach>
+            </div>
+
+           <form action="Cadastro_Comentario" method="post">
+               <input type="hidden" name="jogoId" value="${jogo.id}">
+
+               <textarea name="texto" class="form-control" required></textarea>
+
+               <button type="submit" class="btn btn-primary mt-2">Comentar</button>
+           </form>
+    </div>
+
 
   </div>
 
