@@ -1,6 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:import url="/includes/headerLogin.jsp"/>
+<jsp:include page="/includes/headerLogin.jsp" />
+
+
+<c:if test="${not empty param.termo and empty resultados}">
+    <p>Nenhum jogo encontrado</p>
+</c:if>
+
+<c:if test="${empty lista}">
+    <p>Não há jogos adicionados</p>
+</c:if>
+
+
 
 <section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">

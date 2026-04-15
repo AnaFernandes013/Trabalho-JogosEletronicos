@@ -5,6 +5,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
+import java.util.ArrayList;
 
 @WebServlet(name = "VerJogo", value = "/ver_jogo")
 public class VerJogo extends HttpServlet {

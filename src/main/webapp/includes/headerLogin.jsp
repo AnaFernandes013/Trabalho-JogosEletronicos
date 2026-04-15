@@ -37,21 +37,21 @@
           <a class="nav-link" href="login.jsp">Meu perfil</a>
         </li>
       </ul>
-      <form class="d-flex" role="search" action="buscar.jsp" method="get">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Buscar Jogo"/>
-        <button class="btn btn-primary" type="submit">Busca</button>
+      <form class="d-flex" role="search" action="buscar" method="get">
+        <input class="form-control me-2" type="search" name="termo" placeholder="Search" />
+        <!--Para enviar para a mesma página sempre o ideal é fazer isso daqui!--->
+        <input type="hidden" name="origem" value="${pageContext.request.requestURI}">
+        <button class="btn-primary" type="submit">Busca</button>
       </form>
     </div>
   </div>
+  <div>${listaMensagens}</div>
 </nav>
 <c:if test="${!empty listaMensagens}">
-<div class="alert alert-danger" role="alert">
-  <ul class="list-group">
-    <c:forEach var="msg" items="${listaMensagens}">
-      <li>${msg}</li>
-    </c:forEach>
-  </ul>
+<div class="alert alert-danger mt-3">
+  <c:forEach var="msg" items="${listaMensagens}">
+    <div>${msg}</div>
+  </c:forEach>
 </div>
 </c:if>
-
 

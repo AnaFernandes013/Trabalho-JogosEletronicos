@@ -1,4 +1,4 @@
-/* Fundo dinâmico com cara de dashboard gamer */
+
 body {
     background-color: #0f172a; /* Azul muito escuro/quase preto */
     font-family: 'Orbitron', sans-serif; /* Opcional: use uma fonte gamer do Google Fonts */
@@ -116,12 +116,12 @@ h3 {
     transition: all 0.3s ease !important;
 }
 
-/* Efeito ao focar no Input (Active State) */
+/* Efeito ao focar no Input  */
 .form-control:focus, .form-select:focus {
     background-color: rgba(30, 41, 59, 1) !important;
     border-color:  #38bdf8 !important;
     box-shadow: 0 0 10px rgba(34, 197, 94, 0.4) !important;
-    transform: translateX(5px); /* Pequeno deslocamento lateral estilo HUD */
+    transform: translateX(5px);
 }
 
 /* Placeholder */
@@ -244,6 +244,11 @@ strong {
     display: none; /* Chrome */
 }
 
+.alert-danger {
+    background-color: #7f1d1d !important; /* vermelho escuro */
+    color: #fff !important;
+    border: 1px solid #ef4444 !important;
+}
 
 
 @media (max-width: 576px) {

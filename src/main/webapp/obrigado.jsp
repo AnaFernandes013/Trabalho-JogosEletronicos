@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:import url="/includes/header.jsp"/>
+<jsp:include page="/includes/headerLogin.jsp" />
     <body>
         <h1>Página de Obrigado!</h1>
 
