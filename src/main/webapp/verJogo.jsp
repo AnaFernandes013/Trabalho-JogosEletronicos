@@ -1,4 +1,4 @@
-
+<jsp:useBean id="jogo" scope="request" type="br.edu.ifsp.Jogo"/>
 <%--
   Created by IntelliJ IDEA.
   User: ferna
@@ -8,7 +8,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="/includes/headerLogin.jsp" />
+<%if (session.getAttribute("usuarioLogado") != null) {
+%><c:import url="/includes/headerLogin.jsp"/><%
+} else {
+%><c:import url="/includes/header.jsp"/><%}%>
 
 <body>
 <div class="container py-5">
@@ -51,22 +54,29 @@
     <div class="container">
         <h5>Comentários</h5>
 
-            <div>
-                 <c:forEach var="c" items="${jogo.comentarios}">
-                     <div class="mb-2 p-2 border rounded">
-                         <strong>${c.usuario.usuario}</strong>
-                         <p>${c.texto   }</p>
-                     </div>
-                 </c:forEach>
+        <c:if test="${empty comentarios}">
+            <p>Nenhum comentário ainda.</p>
+        </c:if>
+
+        <c:forEach var="c" items="${comentarios}">
+            <div class="mb-2 p-2 border rounded">
+                <strong>${c.usuario}</strong>
+                <p>${c.texto}</p>
             </div>
+        </c:forEach>
+
+        <!-- apenas usuarios logados -->
+        <c:if test="${not empty sessionScope.usuarioLogado}">
 
            <form action="Cadastro_Comentario" method="post">
                <input type="hidden" name="jogoId" value="${jogo.id}">
 
-               <textarea name="texto" class="form-control" required></textarea>
+               <textarea name="comentario" class="form-control" required></textarea>
 
                <button type="submit" class="btn btn-primary mt-2">Comentar</button>
            </form>
+        </c:if>
+
     </div>
 
 

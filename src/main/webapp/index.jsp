@@ -1,11 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<jsp:include page="/includes/header.jsp" />
+<%if (session.getAttribute("usuarioLogado") != null) {
+%><c:import url="/includes/headerLogin.jsp"/><%
+} else {
+%><c:import url="/includes/header.jsp"/><%}%>
 <c:set var="listaAtual" value="${not empty param.termo ? resultados : lista}" />
-
 <body>
-<div class="container index">
+<div class="container">
     <div class="row">
         <h1>Bem vindos!</h1>
     </div>
@@ -25,9 +27,7 @@
         <p>Não há jogos adicionados</p>
     </c:if>
 
-    <!--  CONTEÚDO NORMAL (SEM BUSCA) -->
     <c:if test="${empty param.termo}">
-
         <div class="row">
             <h3>Destaques</h3>
 
@@ -40,7 +40,7 @@
                             <h5 class="card-title">${j.titulo}</h5>
                             <p class="card-text">${j.sinopse}</p>
 
-                            <form action="ver_jogo" method="get">
+                            <form action="${pageContext.request.contextPath}/ver_jogo" method="get">
                                 <input type="hidden" name="id" value="${j.id}">
                                 <button class="btn btn-primary mt-auto">Veja mais</button>
                             </form>
@@ -49,6 +49,7 @@
                 </div>
             </c:forEach>
         </div>
+
 
         <div class="row">
             <h3>Lançamentos</h3>
@@ -99,10 +100,11 @@
         </div>
 
     </c:if>
-
     <div class="row">
+
         <h3>Todos os jogos</h3>
-        <c:forEach var="j" items="${listaAtual}">
+
+        <c:forEach var="j" items="${not empty param.termo ? resultados : lista}">
             <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
 
                 <div class="card h-100">
@@ -123,14 +125,10 @@
 
             </div>
         </c:forEach>
-
     </div>
-
     <c:if test="${not empty param.termo}">
         <a href="index.jsp" class="btn btn-secondary mt-3">Limpar busca</a>
     </c:if>
-
 </div>
-</body>
 
 <c:import url="/includes/footer.jsp"/>

@@ -18,6 +18,10 @@ public class Usuario implements Serializable {
         return usuario;
     }
 
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -30,4 +34,7 @@ public class Usuario implements Serializable {
         return senha;
     }
 
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 }

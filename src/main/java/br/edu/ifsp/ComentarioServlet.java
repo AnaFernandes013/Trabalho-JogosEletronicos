@@ -13,19 +13,23 @@ public class ComentarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        HttpSession sessao = request.getSession();
+
+        if (sessao.getAttribute("usuarioLogado") == null) {
+            response.sendRedirect("erro.jsp");
+            return;
+        }
+
         String texto = request.getParameter("comentario");
         String jogoId = request.getParameter("jogoId");
 
-        List<String> listaMensagens = new ArrayList<>();
-
-        if (texto == null || texto.isEmpty()) {
-            listaMensagens.add("Falta o comentário");
+        if (texto == null || texto.trim().isEmpty()) {
+            response.sendRedirect("ver_jogo?id=" + jogoId);
+            return;
         }
 
-        // pegar usuário da sessão OLHA AQUI LARAA!!
-        Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+        Usuario usuario = (Usuario) sessao.getAttribute("usuario");
 
-        // pegar lista de jogos
         List<Jogo> listaJogos = (List<Jogo>) getServletContext().getAttribute("lista");
 
         Jogo jogoSelecionado = null;
@@ -37,21 +41,22 @@ public class ComentarioServlet extends HttpServlet {
             }
         }
 
-        // criar comentário
-        Comentario c = new Comentario(texto, usuario, jogoSelecionado);
-
-        // pegar lista de comentários (ou criar se não existir)
-        List<Comentario> listaComentario = (List<Comentario>) getServletContext().getAttribute("comentarios");
+        // 👇 PEGAR LISTA UMA VEZ SÓ
+        List<Comentario> listaComentario =
+                (List<Comentario>) getServletContext().getAttribute("comentarios");
 
         if (listaComentario == null) {
             listaComentario = new ArrayList<>();
+            getServletContext().setAttribute("comentarios", listaComentario);
         }
+
+        // criar comentário
+        Comentario c = new Comentario(texto, usuario, jogoSelecionado);
 
         listaComentario.add(c);
 
         getServletContext().setAttribute("comentarios", listaComentario);
 
-        // redirecionar de volta pro jogo
         response.sendRedirect("ver_jogo?id=" + jogoId);
     }
 }

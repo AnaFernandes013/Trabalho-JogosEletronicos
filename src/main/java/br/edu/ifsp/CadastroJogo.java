@@ -1,5 +1,6 @@
 package br.edu.ifsp;
 
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -8,20 +9,24 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-@MultipartConfig// Permite o envio de arquivos (upload de imagem)
+@MultipartConfig
 @WebServlet(name = "CadastroJogo", value = "/cadastrar_jogo")
 public class CadastroJogo extends HttpServlet {
 
-    // Lista estática para armazenar os jogos em memória
     public static List<Jogo> lista = null;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // para evitar problemas com acentos
-        request.setCharacterEncoding("UTF-8");
+        HttpSession sessao = request.getSession();
 
+        if (sessao.getAttribute("usuarioLogado") == null) {
+            response.sendRedirect("erro.jsp");
+            return;
+        }
+
+        // faz a requisição, pega do html o name e joga para as variaveis
         String titulo = request.getParameter("titulo");
         String desenvolvedor = request.getParameter("desenvolvedor");
         String anoLancamento = request.getParameter("ano");
@@ -31,109 +36,108 @@ public class CadastroJogo extends HttpServlet {
         String plataforma = request.getParameter("plataforma");
         String classificacao = request.getParameter("classificacao");
 
-        // Captura do arquivo enviado (imagem da capa)
         Part capaPart = request.getPart("capa");
 
-        List<String> listaMensagens = new ArrayList<>();
+        String url;
 
-        // VALIDAÇÕES
-        if (titulo == null || titulo.isEmpty()) {
-            listaMensagens.add("Falta o título");
+        boolean temErro = false;
+
+        if (titulo == null || titulo.isEmpty()) { // verifica se cada campo esta vazio ou nao
+            request.setAttribute("erroTitulo", "Informe o titulo");
+            temErro = true;
         }
 
         if (desenvolvedor == null || desenvolvedor.isEmpty()) {
-            listaMensagens.add("Falta o desenvolvedor");
+            request.setAttribute("erroDesenvolvedor", "Informe o desenvolvedor");
+            temErro = true;
         }
 
         if (anoLancamento == null || anoLancamento.isEmpty()) {
-            listaMensagens.add("Falta o ano");
+            request.setAttribute("erroAno", "Informe o ano de lançamento");
+            temErro = true;
         }
-
         if (genero == null || genero.isEmpty()) {
-            listaMensagens.add("Falta o gênero");
+            request.setAttribute("erroGenero", "Informe o genero");
+            temErro = true;
         }
-
         if (sinopse == null || sinopse.isEmpty()) {
-            listaMensagens.add("Falta a sinopse");
+            request.setAttribute("erroSinopse", "Informe a sinopse");
+            temErro = true;
         }
-
         if (idioma == null || idioma.isEmpty()) {
-            listaMensagens.add("Falta o idioma");
+            request.setAttribute("erroIdioma", "Informe o idioma");
+            temErro = true;
         }
-
         if (plataforma == null || plataforma.isEmpty()) {
-            listaMensagens.add("Falta a plataforma");
+            request.setAttribute("erroPlataforma", "Informe a plataforma");
+            temErro = true;
         }
-
         if (classificacao == null || classificacao.isEmpty()) {
-            listaMensagens.add("Falta a classificação");
+            request.setAttribute("erroClassificacao", "Informe a classificação");
+            temErro = true;
         }
 
         if (capaPart == null || capaPart.getSize() == 0) {
-            listaMensagens.add("Falta a capa");
+            request.setAttribute("erroCapa", "Informe a capa");
+            temErro = true;
         }
 
-        // SE TEM ERRO
-        if (!listaMensagens.isEmpty()) {
-
-            request.getSession().setAttribute("listaMensagens", listaMensagens);
+        if (temErro) {
             request.getRequestDispatcher("/cadastroJogo.jsp").forward(request, response);
-
             return;
+        } else {
+
+            //salva a imagem
+            String nomeArquivo = capaPart.getSubmittedFileName();
+
+            if (nomeArquivo.contains("\\")) { //remove o caminho do arquivo
+                nomeArquivo = nomeArquivo.substring(nomeArquivo.lastIndexOf("\\") + 1);
+            }
+
+            // cria um novo nome pra nao dar erro
+            nomeArquivo = System.currentTimeMillis() + "_" + nomeArquivo;
+
+            // caminho da pasta imagens
+            String caminho = getServletContext().getRealPath("/imagens");
+
+            File pasta = new File(caminho); // cria a pasta se nao existir
+            if (!pasta.exists()) {
+                pasta.mkdir();
+            }
+
+            // junta tudo
+            capaPart.write(caminho + File.separator + nomeArquivo);
+
+
+            Jogo j = new Jogo(
+                    titulo,
+                    desenvolvedor,
+                    anoLancamento,
+                    genero,
+                    sinopse,
+                    idioma,
+                    plataforma,
+                    classificacao,
+                    nomeArquivo
+            );
+
+            List<Jogo> lista = (List<Jogo>) getServletContext().getAttribute("lista");
+            if (lista == null) {
+                lista = new ArrayList<>();
+                getServletContext().setAttribute("lista", lista);
+            }
+            lista.add(j);
+
+            request.setAttribute("msgSucessoJogo", "Jogo cadastrado com sucesso!");
+            url = "/listarJogo.jsp";
         }
 
-        // ----------------------------
-        // salvar imagem
-
-        String nomeArquivo = capaPart.getSubmittedFileName();
-
-
-        // Remove caminho do arquivo
-        if (nomeArquivo.contains("\\")) {
-            nomeArquivo = nomeArquivo.substring(nomeArquivo.lastIndexOf("\\") + 1);
-        }
-
-        // Gera nome único para evitar conflito
-        nomeArquivo = System.currentTimeMillis() + "_" + nomeArquivo;
-
-        // Caminho da pasta imagens dentro do projeto
-        String caminho = getServletContext().getRealPath("/imagens");
-
-        // Cria pasta se não existir
-        File pasta = new File(caminho);
-        if (!pasta.exists()) {
-            pasta.mkdir();
-        }
-
-        capaPart.write(caminho + File.separator + nomeArquivo);
-
-        // ----------------------------
-        // CRIAR JOGO
-        // ----------------------------
-        Jogo j = new Jogo(
-                titulo,
-                desenvolvedor,
-                anoLancamento,
-                genero,
-                sinopse,
-                idioma,
-                plataforma,
-                classificacao,
-                nomeArquivo
-        );
-
-        List<Jogo> lista = (List<Jogo>) getServletContext().getAttribute("lista");
-        lista.add(j);
-
-
-        request.getRequestDispatcher("/listarJogo.jsp")
-                .forward(request, response);
+        getServletContext().getRequestDispatcher(url).forward(request, response);
     }
-
-    @Override
+  @Override
     public void init() throws ServletException {
         lista = new ArrayList<>();
         getServletContext().setAttribute("lista", lista);
-        System.out.println("🔥 ENTROU NO SERVLET");
     }
+
 }

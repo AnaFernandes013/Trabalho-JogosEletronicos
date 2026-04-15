@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Trabaio</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
@@ -34,7 +34,10 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="login.jsp">Meu perfil</a>
+          <a class="nav-link" href="editar_perfil">Meu perfil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.jsp">Sair</a>
         </li>
       </ul>
       <form class="d-flex" role="search" action="buscar" method="get">
@@ -43,13 +46,15 @@
       </form>
     </div>
   </div>
-  <div>${listaMensagens}</div>
 </nav>
 <c:if test="${!empty listaMensagens}">
-<div class="alert alert-danger mt-3">
-  <c:forEach var="msg" items="${listaMensagens}">
-    <div>${msg}</div>
-  </c:forEach>
+<div class="alert alert-danger" role="alert">
+  <ul class="list-group">
+    <c:forEach var="msg" items="${listaMensagens}">
+      <li>${msg}</li>
+    </c:forEach>
+  </ul>
 </div>
 </c:if>
+
 

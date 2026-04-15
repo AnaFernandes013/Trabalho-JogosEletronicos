@@ -4,15 +4,14 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "VerJogo", value = "/ver_jogo")
 public class VerJogo extends HttpServlet {
 
 
     public static List<Jogo> lista = null;
-    public static List<Comentario> listaComentarios = null;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,6 +19,14 @@ public class VerJogo extends HttpServlet {
 
         List<Jogo> lista = (List<Jogo>) getServletContext().getAttribute("lista");
         List<Comentario> listaComentarios = (List<Comentario>) getServletContext().getAttribute("comentarios");
+
+        if (listaComentarios == null) {
+            listaComentarios = new ArrayList<>();
+            getServletContext().setAttribute("comentarios", listaComentarios);
+        }
+
+        System.out.println(lista);
+        System.out.println(listaComentarios);
 
         for (Jogo j : lista) {
             if (String.valueOf(j.getId()).equals(id)) {
@@ -43,8 +50,5 @@ public class VerJogo extends HttpServlet {
         request.getRequestDispatcher("/verJogo.jsp").forward(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // code
-    }
+
 }

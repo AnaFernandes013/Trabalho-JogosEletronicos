@@ -3,10 +3,7 @@ package br.edu.ifsp;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 import java.io.File;
@@ -19,6 +16,14 @@ public class EditaJogo extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession sessao = request.getSession();
+
+        if(sessao.getAttribute("usuarioLogado") == null){
+            response.sendRedirect("erro.jsp");
+            return;
+        }
+
         String id = request.getParameter("id");
 
         List<Jogo> lista = (List<Jogo>) getServletContext().getAttribute("lista");
@@ -81,6 +86,12 @@ public class EditaJogo extends HttpServlet {
             }
         }
 
+        HttpSession sessao = request.getSession();
+
+        sessao.setAttribute("sucessoJogo", "Jogo atualizado com sucesso!");
+
         response.sendRedirect("listarJogo.jsp");
+
+
     }
 }

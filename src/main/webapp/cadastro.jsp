@@ -1,7 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:import url="/includes/headerLogin.jsp"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%if (session.getAttribute("usuarioLogado") != null) {
+%><c:import url="/includes/headerLogin.jsp"/><%
+} else {
+%><c:import url="/includes/header.jsp"/><%}%>
 
+
+<c:remove var="sucessoCadastro" scope="session"/>
+<link rel="stylesheet" href="./css/cadastro.css">
 <section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -13,17 +20,24 @@
 
                             <h2 class="fw-bold mb-2 text-uppercase">Cadastro</h2>
                             <p class="text-white-50 mb-5">Cadastre-se para liberar seu acesso</p>
-                            <form action="cadastrar_usuario" method="post" enctype="multipart/form-data">
-
+                            <form action="cadastrar_usuario" method="post">
 
                                 <div data-mdb-input-init class="form-outline form-white mb-4">
-                                    <input type="text" id="usuarioCadastro" class="form-control form-control-lg" />
+                                    <input type="text" id="usuarioCadastro" name="usuarioCadastro" class="form-control form-control-lg" />
                                     <label class="form-label" for="usuarioCadastro">Usuário</label>
+                                    <div class="erro">${erroUsuarioCadastro}</div>
                                 </div>
 
                                 <div data-mdb-input-init class="form-outline form-white mb-4">
-                                    <input type="password" id="senhaCadastro" class="form-control form-control-lg" />
+                                    <input type="email" id="email" name="email" class="form-control form-control-lg" />
+                                    <label class="form-label" for="email">Email</label>
+                                    <div class="erro">${erroEmail}</div>
+                                </div>
+
+                                <div data-mdb-input-init class="form-outline form-white mb-4">
+                                    <input type="password" id="senhaCadastro" name="senhaCadastro" class="form-control form-control-lg" />
                                     <label class="form-label" for="senhaCadastro">Senha</label>
+                                    <div class="erro">${erroSenhaCadastro}</div>
                                 </div>
 
                                 <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Cadastrar</button>

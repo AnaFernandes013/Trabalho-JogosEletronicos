@@ -7,8 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:import url="/includes/headerLogin.jsp"/>
+
+<%if (session.getAttribute("usuarioLogado") == null) {response.sendRedirect("erro.jsp");return;}%>
+<%if (session.getAttribute("usuarioLogado") != null) {
+%><c:import url="/includes/headerLogin.jsp"/><%
+} else {
+%><c:import url="/includes/header.jsp"/><%}%>
 <body>
+
+<c:remove var="sucessoJogo" scope="session"/>
 <div class="container">
     <div class="container-form">
         <h3 class="text-center mb-4">Cadastro de jogos</h3>
@@ -34,9 +41,6 @@
 
                         <input type="number" name="novoAno" class="form-control mb-2" placeholder="Ano de lançamento" value="${jogo.getAnoLancamento()}">
 
-
-<%--                        uso de operador ternario - tipo if else--%>
-<%--                    Se o gênero do jogo for ‘acao’, então coloca ‘selected’, senão não coloca nada.--%>
                         <select name="novoGenero" class="form-select mb-2">
                             <option value="">Selecione o genêro</option>
                             <option value="acao" ${jogo.genero == 'acao' ? 'selected' : ''}>Ação</option>

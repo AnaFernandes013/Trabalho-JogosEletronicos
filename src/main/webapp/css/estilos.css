@@ -1,4 +1,11 @@
+html, body {
+    height: 100%;
+}
 
+body {
+    display: flex;
+    flex-direction: column;
+}
 body {
     background-color: #0f172a; /* Azul muito escuro/quase preto */
     font-family: 'Orbitron', sans-serif; /* Opcional: use uma fonte gamer do Google Fonts */
@@ -218,7 +225,7 @@ strong {
     margin-top: 50px;
 }
 .table-responsive, .index{
-    margin-bottom: 436px;
+    margin-bottom: 486px;
 }
 .table-info thead th {
     color: #38bdf8;
@@ -249,11 +256,6 @@ strong {
     display: none; /* Chrome */
 }
 
-.alert-danger {
-    background-color: #7f1d1d !important; /* vermelho escuro */
-    color: #fff !important;
-    border: 1px solid #ef4444 !important;
-}
 footer{
     margin-top: auto;
 }

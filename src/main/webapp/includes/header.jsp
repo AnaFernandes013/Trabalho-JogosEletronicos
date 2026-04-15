@@ -2,14 +2,14 @@
 <!DOCTYPE HTML>
 <html lang="pt-br">
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Trabaio</title>
       <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
      <link rel="stylesheet" href="./css/estilos.css">
   </head>
-  <body class="d-flex flex-column min-vh-100">
+<body>
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd !important;" data-bs-theme="light">
     <div class="container-fluid">
