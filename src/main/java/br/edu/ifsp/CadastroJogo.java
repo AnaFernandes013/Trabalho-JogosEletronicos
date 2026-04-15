@@ -8,16 +8,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-@MultipartConfig
+@MultipartConfig// Permite o envio de arquivos (upload de imagem)
 @WebServlet(name = "CadastroJogo", value = "/cadastrar_jogo")
 public class CadastroJogo extends HttpServlet {
 
+    // Lista estática para armazenar os jogos em memória
     public static List<Jogo> lista = null;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // para evitar problemas com acentos
         request.setCharacterEncoding("UTF-8");
 
         String titulo = request.getParameter("titulo");
@@ -29,6 +31,7 @@ public class CadastroJogo extends HttpServlet {
         String plataforma = request.getParameter("plataforma");
         String classificacao = request.getParameter("classificacao");
 
+        // Captura do arquivo enviado (imagem da capa)
         Part capaPart = request.getPart("capa");
 
         List<String> listaMensagens = new ArrayList<>();
@@ -74,8 +77,6 @@ public class CadastroJogo extends HttpServlet {
         if (!listaMensagens.isEmpty()) {
 
             request.getSession().setAttribute("listaMensagens", listaMensagens);
-
-
             request.getRequestDispatcher("/cadastroJogo.jsp").forward(request, response);
 
             return;
@@ -86,14 +87,19 @@ public class CadastroJogo extends HttpServlet {
 
         String nomeArquivo = capaPart.getSubmittedFileName();
 
+
+        // Remove caminho do arquivo
         if (nomeArquivo.contains("\\")) {
             nomeArquivo = nomeArquivo.substring(nomeArquivo.lastIndexOf("\\") + 1);
         }
 
+        // Gera nome único para evitar conflito
         nomeArquivo = System.currentTimeMillis() + "_" + nomeArquivo;
 
+        // Caminho da pasta imagens dentro do projeto
         String caminho = getServletContext().getRealPath("/imagens");
 
+        // Cria pasta se não existir
         File pasta = new File(caminho);
         if (!pasta.exists()) {
             pasta.mkdir();

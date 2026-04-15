@@ -39,8 +39,6 @@
       </ul>
       <form class="d-flex" role="search" action="buscar" method="get">
         <input class="form-control me-2" type="search" name="termo" placeholder="Search" />
-        <!--Para enviar para a mesma página sempre o ideal é fazer isso daqui!--->
-        <input type="hidden" name="origem" value="${pageContext.request.requestURI}">
         <button class="btn-primary" type="submit">Busca</button>
       </form>
     </div>

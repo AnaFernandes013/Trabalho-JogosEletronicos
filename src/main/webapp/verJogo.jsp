@@ -1,4 +1,4 @@
-<jsp:useBean id="jogo" scope="request" type="br.edu.ifsp.Jogo"/>
+
 <%--
   Created by IntelliJ IDEA.
   User: ferna
@@ -9,7 +9,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/includes/headerLogin.jsp" />
-
 
 <body>
 <div class="container py-5">

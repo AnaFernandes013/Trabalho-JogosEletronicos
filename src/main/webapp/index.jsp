@@ -1,14 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <jsp:include page="/includes/header.jsp" />
-
 <c:set var="listaAtual" value="${not empty param.termo ? resultados : lista}" />
 
 <body>
-<div class="container">
-
+<div class="container index">
     <div class="row">
         <h1>Bem vindos!</h1>
     </div>

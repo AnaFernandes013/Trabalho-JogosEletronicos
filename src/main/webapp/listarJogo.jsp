@@ -1,16 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <jsp:include page="/includes/header.jsp" />
-
 <body>
 <div class="container">
-
     <br>
     <h1>Lista de jogos</h1>
     <br>
-
     <div class="table-responsive">
         <table class="table table-info">
             <thead>
@@ -75,6 +71,8 @@
     </div>
 
 </div>
+
+
 </body>
 
 <script src="js/busca.js"></script>

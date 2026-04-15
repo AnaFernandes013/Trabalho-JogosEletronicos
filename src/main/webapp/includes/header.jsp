@@ -9,7 +9,7 @@
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
      <link rel="stylesheet" href="./css/estilos.css">
   </head>
-<body>
+  <body class="d-flex flex-column min-vh-100">
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #e3f2fd !important;" data-bs-theme="light">
     <div class="container-fluid">
@@ -31,8 +31,6 @@
             </ul>
             <form class="d-flex" role="search" action="buscar" method="get">
                 <input class="form-control me-2" type="search" name="termo" placeholder="Search" />
-                <!--Para enviar para a mesma página sempre o ideal é fazer isso daqui!--->
-                <input type="hidden" name="origem" value="${pageContext.request.requestURI}">
                 <button class="btn-primary" type="submit">Busca</button>
             </form>
         </div>

@@ -9,10 +9,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/includes/headerLogin.jsp" />
 
-<c:if test="${not empty param.termo and empty resultados}">
-    <p>Nenhum jogo encontrado</p>
-</c:if>
-
 <div class="cont">
     <h1>️ Sobre o Sistema</h1>
 
