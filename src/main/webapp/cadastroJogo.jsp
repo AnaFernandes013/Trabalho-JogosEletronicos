@@ -1,6 +1,7 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:import url="/includes/headerLogin.jsp"/>
+<jsp:include page="/includes/headerLogin.jsp" />
 
         <div class="container">
             <h3 class="text-center mb-4">Cadastro de jogos</h3>
@@ -21,7 +22,7 @@
 
                     <div class="col-md-8">
 
-                        <input type="text" name="titulo" class="form-control mb-2" placeholder="Título" required>
+                        <input type="text" name="titulo" class="form-control mb-2" placeholder="Título">
 
                         <input type="text" name="desenvolvedor" class="form-control mb-2" placeholder="Desenvolvedor" required>
 
@@ -67,6 +68,15 @@
             </form>
         </div>
 
+<c:if test="${not empty sessionScope.listaMensagens}">
+    <div class="alert alert-danger mt-3">
+        <c:forEach var="msg" items="${sessionScope.listaMensagens}">
+            <div>${msg}</div>
+        </c:forEach>
+    </div>
+</c:if>
 
-    <script src="js/imagem.js"></script>
+<c:remove var="listaMensagens" scope="session"/>
+
+    <script src="js/cadastro.js"></script>
 <c:import url="/includes/footer.jsp"/>

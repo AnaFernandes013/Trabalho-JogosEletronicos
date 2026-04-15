@@ -10,36 +10,30 @@ import java.util.List;
 import static br.edu.ifsp.CadastroJogo.lista;
 
 @WebServlet(name = "BuscaTermo", value = "/buscar")
-
 public class BuscaTermo extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String termo = request.getParameter("termo");
-        String origem = request.getParameter("origem");
 
-        if (origem == null || origem.isEmpty()) {
-            origem = "index.jsp";
+        List<Jogo> resultados = new ArrayList<>();
+
+        if (termo == null || termo.isEmpty()) {
+            resultados = lista;
         } else {
-            origem = origem.substring(origem.lastIndexOf("/") + 1);
-        }
-
-        if (termo == null || termo.isEmpty()) { // verifica se o termo n ta vazio
-            request.setAttribute("resultados", lista);
-        } else {
-            List<Jogo> resultados = new ArrayList<>();
-
             for (Jogo jogo : lista) {
-                if (jogo.getTitulo().toLowerCase().contains(termo.toLowerCase())) { // procura se o jogo existe
-                    resultados.add(jogo); // adiciona
+                if (jogo.getTitulo().toLowerCase().contains(termo.toLowerCase())) {
+                    resultados.add(jogo);
                 }
             }
-
-            request.setAttribute("resultados", resultados);
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher(origem);
+        request.setAttribute("resultados", resultados);
+
+        // 🔥 SEMPRE vai pro index
+        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
         rd.forward(request, response);
     }
 

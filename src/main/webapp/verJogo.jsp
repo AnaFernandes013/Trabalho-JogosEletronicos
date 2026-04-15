@@ -8,7 +8,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:import url="/includes/headerLogin.jsp"/>
+<jsp:include page="/includes/headerLogin.jsp" />
+
 
 <body>
 <div class="container py-5">

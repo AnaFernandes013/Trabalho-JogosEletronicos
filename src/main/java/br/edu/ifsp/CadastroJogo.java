@@ -17,7 +17,9 @@ public class CadastroJogo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // faz a requisição, pega do html o name e joga para as variaveis
+
+        request.setCharacterEncoding("UTF-8");
+
         String titulo = request.getParameter("titulo");
         String desenvolvedor = request.getParameter("desenvolvedor");
         String anoLancamento = request.getParameter("ano");
@@ -29,93 +31,103 @@ public class CadastroJogo extends HttpServlet {
 
         Part capaPart = request.getPart("capa");
 
-        String url;
-
         List<String> listaMensagens = new ArrayList<>();
 
-        if(titulo == null || titulo.isEmpty()){ // verifica se cada campo esta vazio ou nao
+        // VALIDAÇÕES
+        if (titulo == null || titulo.isEmpty()) {
             listaMensagens.add("Falta o título");
         }
 
-        if(desenvolvedor == null || desenvolvedor.isEmpty()) {
+        if (desenvolvedor == null || desenvolvedor.isEmpty()) {
             listaMensagens.add("Falta o desenvolvedor");
         }
 
-        if(anoLancamento == null || anoLancamento.isEmpty()) {
+        if (anoLancamento == null || anoLancamento.isEmpty()) {
             listaMensagens.add("Falta o ano");
         }
-        if(genero == null || genero.isEmpty()) {
+
+        if (genero == null || genero.isEmpty()) {
             listaMensagens.add("Falta o gênero");
         }
-        if(sinopse == null || sinopse.isEmpty()) {
+
+        if (sinopse == null || sinopse.isEmpty()) {
             listaMensagens.add("Falta a sinopse");
         }
-        if(idioma == null || idioma.isEmpty()) {
+
+        if (idioma == null || idioma.isEmpty()) {
             listaMensagens.add("Falta o idioma");
         }
-        if(plataforma == null || plataforma.isEmpty()) {
+
+        if (plataforma == null || plataforma.isEmpty()) {
             listaMensagens.add("Falta a plataforma");
         }
-        if(classificacao == null || classificacao.isEmpty()) {
+
+        if (classificacao == null || classificacao.isEmpty()) {
             listaMensagens.add("Falta a classificação");
         }
 
-        if(capaPart == null || capaPart.getSize() == 0){
+        if (capaPart == null || capaPart.getSize() == 0) {
             listaMensagens.add("Falta a capa");
         }
 
-        if(!listaMensagens.isEmpty()){
-            request.setAttribute("listaMensagens", listaMensagens);
-            url = "/cadastroJogo.jsp";
+        // SE TEM ERRO
+        if (!listaMensagens.isEmpty()) {
 
-        } else {
-
-
-            String nomeArquivo = capaPart.getSubmittedFileName();
-
-            if(nomeArquivo.contains("\\")){
-                nomeArquivo = nomeArquivo.substring(nomeArquivo.lastIndexOf("\\") + 1);
-            }
+            request.getSession().setAttribute("listaMensagens", listaMensagens);
 
 
-            nomeArquivo = System.currentTimeMillis() + "_" + nomeArquivo;
+            request.getRequestDispatcher("/cadastroJogo.jsp").forward(request, response);
 
-
-            String caminho = getServletContext().getRealPath("/imagens");
-
-            File pasta = new File(caminho);
-            if(!pasta.exists()){
-                pasta.mkdir();
-            }
-
-
-            capaPart.write(caminho + File.separator + nomeArquivo);
-
-
-            Jogo j = new Jogo(
-                    titulo,
-                    desenvolvedor,
-                    anoLancamento,
-                    genero,
-                    sinopse,
-                    idioma,
-                    plataforma,
-                    classificacao,
-                    nomeArquivo
-            );
-
-            List<Jogo> lista = (List<Jogo>) getServletContext().getAttribute("lista");
-            lista.add(j);
-
-            url = "/listarJogo.jsp";
+            return;
         }
 
-        getServletContext().getRequestDispatcher(url).forward(request, response);
+        // ----------------------------
+        // salvar imagem
+
+        String nomeArquivo = capaPart.getSubmittedFileName();
+
+        if (nomeArquivo.contains("\\")) {
+            nomeArquivo = nomeArquivo.substring(nomeArquivo.lastIndexOf("\\") + 1);
+        }
+
+        nomeArquivo = System.currentTimeMillis() + "_" + nomeArquivo;
+
+        String caminho = getServletContext().getRealPath("/imagens");
+
+        File pasta = new File(caminho);
+        if (!pasta.exists()) {
+            pasta.mkdir();
+        }
+
+        capaPart.write(caminho + File.separator + nomeArquivo);
+
+        // ----------------------------
+        // CRIAR JOGO
+        // ----------------------------
+        Jogo j = new Jogo(
+                titulo,
+                desenvolvedor,
+                anoLancamento,
+                genero,
+                sinopse,
+                idioma,
+                plataforma,
+                classificacao,
+                nomeArquivo
+        );
+
+        List<Jogo> lista = (List<Jogo>) getServletContext().getAttribute("lista");
+        lista.add(j);
+
+
+        request.getRequestDispatcher("/listarJogo.jsp")
+                .forward(request, response);
     }
 
     @Override
     public void init() throws ServletException {
         lista = new ArrayList<>();
         getServletContext().setAttribute("lista", lista);
+        System.out.println("🔥 ENTROU NO SERVLET");
     }
 }
