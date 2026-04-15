@@ -34,6 +34,9 @@
 
                         <input type="number" name="novoAno" class="form-control mb-2" placeholder="Ano de lançamento" value="${jogo.getAnoLancamento()}">
 
+
+<%--                        uso de operador ternario - tipo if else--%>
+<%--                    Se o gênero do jogo for ‘acao’, então coloca ‘selected’, senão não coloca nada.--%>
                         <select name="novoGenero" class="form-select mb-2">
                             <option value="">Selecione o genêro</option>
                             <option value="acao" ${jogo.genero == 'acao' ? 'selected' : ''}>Ação</option>

@@ -1,13 +1,22 @@
 
- </br>
- </br>
- </br>
- </br>
- </br>
- </br>
- </br>
 
- <ul class="nav justify-content-center border-bottom pb-3 mb-3"> <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li> <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li> <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li> <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li> <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li> </ul> <p class="text-center text-body-secondary">© 2025 Company, Inc</p>
+<footer class="mt-5 py-4 footer" style="background-color: #e3f2fd !important;" data-bs-theme="light">
+ <div class="container text-center">
+
+  <div class="mb-2">
+   <a href="index.jsp" class="text-dark me-3">Home</a>
+   <a href="sobre.jsp" class="text-dark me-3">Sobre</a>
+   <a href="listarJogo.jsp" class="text-dark">Jogos</a>
+  </div>
+
+  <!-- Direitos -->
+  <p class="direitos text-dark">
+   © 2026 - Desenvolvido por Ana & Lara
+  </p>
+
+ </div>
+</footer>
+
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

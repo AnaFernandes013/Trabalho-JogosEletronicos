@@ -32,7 +32,7 @@ public class BuscaTermo extends HttpServlet {
 
         request.setAttribute("resultados", resultados);
 
-        // 🔥 SEMPRE vai pro index
+        //SEMPRE vai pro index
         RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
         rd.forward(request, response);
     }

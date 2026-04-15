@@ -214,7 +214,12 @@ strong {
     font-size: 1.1rem;
 }
 
-
+.index{
+    margin-top: 50px;
+}
+.table-responsive, .index{
+    margin-bottom: 436px;
+}
 .table-info thead th {
     color: #38bdf8;
     text-transform: uppercase;
@@ -249,8 +254,14 @@ strong {
     color: #fff !important;
     border: 1px solid #ef4444 !important;
 }
+footer{
+    margin-top: auto;
+}
 
 
+.direitos{
+    color:black!important;
+}
 @media (max-width: 576px) {
     .card-img-top {
         aspect-ratio: 4/4;
