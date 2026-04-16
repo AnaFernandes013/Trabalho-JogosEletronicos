@@ -14,7 +14,12 @@ public class ExcluiJogo extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // No doGet ou doPost, antes de fazer qualquer operação com a resposta:
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
+// Se estiver recebendo dados via requisição, também defina a codificação:
+        request.setCharacterEncoding("UTF-8");
         HttpSession sessao = request.getSession();
 
         if(sessao.getAttribute("usuarioLogado") == null){
@@ -28,6 +33,13 @@ public class ExcluiJogo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
+
+        // No doGet ou doPost, antes de fazer qualquer operação com a resposta:
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+// Se estiver recebendo dados via requisição, também defina a codificação:
+        request.setCharacterEncoding("UTF-8");
 
         List<Jogo> lista = (List<Jogo>) getServletContext().getAttribute("lista");
         Jogo jogoEncontrado =null;

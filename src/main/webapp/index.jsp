@@ -1,10 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%if (session.getAttribute("usuarioLogado") != null) {
 %><c:import url="/includes/headerLogin.jsp"/><%
 } else {
 %><c:import url="/includes/header.jsp"/><%}%>
+
 <c:set var="listaAtual" value="${not empty param.termo ? resultados : lista}" />
 <body>
 <div class="container">
@@ -38,7 +40,7 @@
 
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">${j.titulo}</h5>
-                            <p class="card-text">${j.sinopse}</p>
+                            <p class="card-text white">${j.sinopse}</p>
 
                             <form action="${pageContext.request.contextPath}/ver_jogo" method="get">
                                 <input type="hidden" name="id" value="${j.id}">
@@ -62,7 +64,7 @@
 
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">${j.titulo}</h5>
-                                <p class="card-text">${j.sinopse}</p>
+                                <p class="card-text white">${j.sinopse}</p>
 
                                 <form action="ver_jogo" method="get">
                                     <input type="hidden" name="id" value="${j.id}">
@@ -86,7 +88,7 @@
 
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">${j.titulo}</h5>
-                                <p class="card-text">${j.sinopse}</p>
+                                 <p class="card-text white">${j.sinopse}</p>
 
                                 <form action="ver_jogo" method="get">
                                     <input type="hidden" name="id" value="${j.id}">
@@ -114,7 +116,7 @@
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">${j.titulo}</h5>
 
-                        <p class="card-text">${j.sinopse}</p>
+                         <p class="card-text white">${j.sinopse}</p>
 
                         <form action="ver_jogo" method="get">
                             <input type="hidden" name="id" value="${j.id}">

@@ -16,6 +16,13 @@ public class BuscaTermo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // No doGet ou doPost, antes de fazer qualquer operação com a resposta:
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+// Se estiver recebendo dados via requisição, também defina a codificação:
+        request.setCharacterEncoding("UTF-8");
+
         String termo = request.getParameter("termo");
 
         List<Jogo> resultados = new ArrayList<>();
@@ -39,6 +46,11 @@ public class BuscaTermo extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // code
+        // No doGet ou doPost, antes de fazer qualquer operação com a resposta:
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+// Se estiver recebendo dados via requisição, também defina a codificação:
+        request.setCharacterEncoding("UTF-8");
     }
 }

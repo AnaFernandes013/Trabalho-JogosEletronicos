@@ -16,13 +16,19 @@ public class EditaJogo extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // No doGet ou doPost, antes de fazer qualquer operação com a resposta:
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
+// Se estiver recebendo dados via requisição, também defina a codificação:
+        request.setCharacterEncoding("UTF-8");
         HttpSession sessao = request.getSession();
 
         if(sessao.getAttribute("usuarioLogado") == null){
             response.sendRedirect("erro.jsp");
             return;
         }
+        // pega o id pelo get e tras os dados pra mostrar na pagina
 
         String id = request.getParameter("id");
 
@@ -41,9 +47,15 @@ public class EditaJogo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
+        // No doGet ou doPost, antes de fazer qualquer operação com a resposta:
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+// Se estiver recebendo dados via requisição, também defina a codificação:
+        request.setCharacterEncoding("UTF-8");
 
         List<Jogo> lista = (List<Jogo>) getServletContext().getAttribute("lista");
-
+        // realiza a edição
         Part capaPart = request.getPart("capa");
 
         for (Jogo j : lista) {
@@ -60,6 +72,7 @@ public class EditaJogo extends HttpServlet {
 
 
                 if (capaPart != null && capaPart.getSize() > 0) {
+
 
                     String nomeArquivo = capaPart.getSubmittedFileName();
 
@@ -87,7 +100,7 @@ public class EditaJogo extends HttpServlet {
         }
 
         HttpSession sessao = request.getSession();
-
+    // envio de msg
         sessao.setAttribute("sucessoJogo", "Jogo atualizado com sucesso!");
 
         response.sendRedirect("listarJogo.jsp");

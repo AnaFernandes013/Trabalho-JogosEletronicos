@@ -16,7 +16,14 @@ public class VerJogo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
+        // No doGet ou doPost, antes de fazer qualquer operação com a resposta:
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
+// Se estiver recebendo dados via requisição, também defina a codificação:
+        request.setCharacterEncoding("UTF-8");
+
+        // recuperando listas ja existentes
         List<Jogo> lista = (List<Jogo>) getServletContext().getAttribute("lista");
         List<Comentario> listaComentarios = (List<Comentario>) getServletContext().getAttribute("comentarios");
 
@@ -33,7 +40,7 @@ public class VerJogo extends HttpServlet {
 
                 request.setAttribute("jogo", j);
 
-                List<Comentario> comentariosDoJogo = new ArrayList<>();
+                    List<Comentario> comentariosDoJogo = new ArrayList<>(); // criando uma nova lista
 
                 for (Comentario c : listaComentarios) {
                     if (c.getJogo().getId() == j.getId()) {

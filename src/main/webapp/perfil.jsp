@@ -1,7 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<c:import url="/includes/headerLogin.jsp"/>
+<%if (session.getAttribute("usuarioLogado") == null) {response.sendRedirect("erro.jsp");return;}%>
+<%if (session.getAttribute("usuarioLogado") != null) {
+%><c:import url="/includes/headerLogin.jsp"/><%
+} else {
+%><c:import url="/includes/header.jsp"/><%}%>
 
 
 <c:if test="${not empty sucessoPerfil}">
