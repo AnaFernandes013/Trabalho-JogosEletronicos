@@ -13,11 +13,19 @@ import java.util.List;
 @WebServlet(name = "CadastroJogo", value = "/cadastrar_jogo")
 public class CadastroJogo extends HttpServlet {
 
+
     public static List<Jogo> lista = null;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        // No doGet ou doPost, antes de fazer qualquer operação com a resposta:
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+// Se estiver recebendo dados via requisição, também defina a codificação:
+        request.setCharacterEncoding("UTF-8");
 
         HttpSession sessao = request.getSession();
 
@@ -121,8 +129,9 @@ public class CadastroJogo extends HttpServlet {
                     nomeArquivo
             );
 
-            List<Jogo> lista = (List<Jogo>) getServletContext().getAttribute("lista");
-            if (lista == null) {
+            List<Jogo> lista = (List<Jogo>) getServletContext().getAttribute("lista"); // pega todos os cadastrados
+
+            if (lista == null) { // se for o primeiro cadastrado ele cria a lista e salva
                 lista = new ArrayList<>();
                 getServletContext().setAttribute("lista", lista);
             }
@@ -136,8 +145,11 @@ public class CadastroJogo extends HttpServlet {
     }
   @Override
     public void init() throws ServletException {
+
         lista = new ArrayList<>();
-        getServletContext().setAttribute("lista", lista);
+        getServletContext().setAttribute("lista", lista); // ajuda a nao precisar ficar criando a lista toda vez
+
+
     }
 
 }

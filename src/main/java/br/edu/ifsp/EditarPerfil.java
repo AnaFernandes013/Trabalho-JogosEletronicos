@@ -12,8 +12,14 @@ public class EditarPerfil extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession sessao = request.getSession();
+        // No doGet ou doPost, antes de fazer qualquer operação com a resposta:
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
+// Se estiver recebendo dados via requisição, também defina a codificação:
+        request.setCharacterEncoding("UTF-8");
+
+        HttpSession sessao = request.getSession();
         Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
 
         if (usuario == null) {
@@ -22,13 +28,19 @@ public class EditarPerfil extends HttpServlet {
         }
 
         request.setAttribute("usuario", usuario);
-
         request.getRequestDispatcher("/perfil.jsp").forward(request, response);
     }
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        // No doGet ou doPost, antes de fazer qualquer operação com a resposta:
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+// Se estiver recebendo dados via requisição, também defina a codificação:
+        request.setCharacterEncoding("UTF-8");
 
         HttpSession sessao = request.getSession();
 
@@ -61,12 +73,8 @@ public class EditarPerfil extends HttpServlet {
         }
 
         if (temErro) {
-
             request.setAttribute("usuario", usuario);
-
-            request.getRequestDispatcher("/perfil.jsp")
-                    .forward(request, response);
-
+            request.getRequestDispatcher("/perfil.jsp").forward(request, response);
             return;
         }
 
@@ -74,12 +82,13 @@ public class EditarPerfil extends HttpServlet {
         usuario.setEmail(novoEmail);
         usuario.setSenha(novaSenha);
 
+
+        // comentarios de edição de sucesso
         sessao.setAttribute("usuarioLogado", usuario);
 
         request.setAttribute("sucessoPerfil", "Perfil atualizado com sucesso!");
         request.setAttribute("usuario", usuario);
 
-        request.getRequestDispatcher("/perfil.jsp")
-                .forward(request, response);
+        request.getRequestDispatcher("/perfil.jsp").forward(request, response);
     }
 }

@@ -12,9 +12,15 @@ public class ComentarioServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // No doGet ou doPost, antes de fazer qualquer operação com a resposta:
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
+// Se estiver recebendo dados via requisição, também defina a codificação:
+        request.setCharacterEncoding("UTF-8");
         HttpSession sessao = request.getSession();
 
+        // SESSAO
         if (sessao.getAttribute("usuarioLogado") == null) {
             response.sendRedirect("erro.jsp");
             return;
@@ -41,19 +47,18 @@ public class ComentarioServlet extends HttpServlet {
             }
         }
 
-        // 👇 PEGAR LISTA UMA VEZ SÓ
-        List<Comentario> listaComentario =
-                (List<Comentario>) getServletContext().getAttribute("comentarios");
+        // PEGAR LISTA UMA VEZ SÓ
+        List<Comentario> listaComentario = (List<Comentario>) getServletContext().getAttribute("comentarios");
 
         if (listaComentario == null) {
-            listaComentario = new ArrayList<>();
+            listaComentario = new ArrayList<>(); // cria a lista comentarios
             getServletContext().setAttribute("comentarios", listaComentario);
         }
 
         // criar comentário
         Comentario c = new Comentario(texto, usuario, jogoSelecionado);
 
-        listaComentario.add(c);
+        listaComentario.add(c); // adiciona o comentario na lista
 
         getServletContext().setAttribute("comentarios", listaComentario);
 

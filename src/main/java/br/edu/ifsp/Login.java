@@ -17,6 +17,13 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // No doGet ou doPost, antes de fazer qualquer operação com a resposta:
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+// Se estiver recebendo dados via requisição, também defina a codificação:
+        request.setCharacterEncoding("UTF-8");
+
         String usuario = request.getParameter("usuarioLogin");
         String senha = request.getParameter("senhaLogin");
 
@@ -38,17 +45,10 @@ public class Login extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
-
+        //
         List<Usuario> listaUsuarios = (List<Usuario>) getServletContext().getAttribute("listaUsuarios");
 
         Usuario usuarioEncontrado = null;
-
-        for (Usuario u : listaUsuarios) {
-            if (u.getUsuario().equals(usuario) && u.getSenha().equals(senha)) {
-                usuarioEncontrado = u;
-                break;
-            }
-        }
 
         // procura usuário na lista
         for (Usuario u : listaUsuarios) {
@@ -72,6 +72,16 @@ public class Login extends HttpServlet {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
     }
+
+    @Override
+    public void init() throws ServletException {
+        // cria a lista
+        List<Usuario> lista = new ArrayList<>();
+        // disponibiliza ela para todos
+        getServletContext().setAttribute("listaUsuarios", lista);
+
+    }
 }
+
 
 

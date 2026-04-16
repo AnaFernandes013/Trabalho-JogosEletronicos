@@ -5,6 +5,7 @@
 %><c:import url="/includes/headerLogin.jsp"/><%
 } else {
 %><c:import url="/includes/header.jsp"/><%}%>
+
 <c:if test="${not empty sucessoCadastro}">
     <div class="alert alert-success">
             ${sucessoCadastro}
