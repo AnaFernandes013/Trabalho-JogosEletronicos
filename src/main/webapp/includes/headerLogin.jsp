@@ -41,7 +41,7 @@
         </li>
       </ul>
       <form class="d-flex" role="search" action="buscar" method="get">
-        <input class="form-control me-2" type="search" name="termo" placeholder="Search" />
+        <input class="form-control me-2" type="search" name="termo" placeholder="Busque o jogo..." />
         <button class="btn-primary" type="submit">Busca</button>
       </form>
     </div>

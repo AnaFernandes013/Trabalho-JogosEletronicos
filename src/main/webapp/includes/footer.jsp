@@ -1,15 +1,9 @@
-<footer class="mt-5 py-4 footer" style="background-color: #e3f2fd !important;" data-bs-theme="light">
+<footer class="py-4 footer" style="background-color: #e3f2fd !important;" data-bs-theme="light">
  <div class="container text-center">
-
-  <div class="mb-2">
-   <a href="index.jsp" class="text-dark me-3">Home</a>
-   <a href="sobre.jsp" class="text-dark me-3">Sobre</a>
-   <a href="listarJogo.jsp" class="text-dark">Jogos</a>
-  </div>
 
   <!-- Direitos -->
   <p class="direitos text-dark">
-   © 2026 - Desenvolvido por Ana & Lara
+   2026 - Desenvolvido por Ana & Lara
   </p>
 
  </div>
