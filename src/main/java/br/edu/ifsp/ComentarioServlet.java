@@ -11,17 +11,14 @@ import java.util.List;
 public class ComentarioServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // No doGet ou doPost, antes de fazer qualquer operação com a resposta:
-        response.setContentType("text/html; charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-// Se estiver recebendo dados via requisição, também defina a codificação:
-        request.setCharacterEncoding("UTF-8");
         HttpSession sessao = request.getSession();
 
-        // SESSAO
-        if (sessao.getAttribute("usuarioLogado") == null) {
+        Usuario usuario = (Usuario) sessao.getAttribute("usuarioLogado");
+
+        if (usuario == null) {
             response.sendRedirect("erro.jsp");
             return;
         }
@@ -34,31 +31,43 @@ public class ComentarioServlet extends HttpServlet {
             return;
         }
 
-        Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+        List<Jogo> listaJogos =
+                (List<Jogo>) getServletContext().getAttribute("lista");
 
-        List<Jogo> listaJogos = (List<Jogo>) getServletContext().getAttribute("lista");
+        if (listaJogos == null) {
+            throw new RuntimeException("Lista de jogos não encontrada");
+        }
+
+        int idInt;
+        try {
+            idInt = Integer.parseInt(jogoId);
+        } catch (Exception e) {
+            throw new RuntimeException("ID inválido: " + jogoId);
+        }
 
         Jogo jogoSelecionado = null;
 
         for (Jogo j : listaJogos) {
-            if (String.valueOf(j.getId()).equals(jogoId)) {
+            if (j.getId() == idInt) {
                 jogoSelecionado = j;
                 break;
             }
         }
 
-        // PEGAR LISTA UMA VEZ SÓ
-        List<Comentario> listaComentario = (List<Comentario>) getServletContext().getAttribute("comentarios");
-
-        if (listaComentario == null) {
-            listaComentario = new ArrayList<>(); // cria a lista comentarios
-            getServletContext().setAttribute("comentarios", listaComentario);
+        if (jogoSelecionado == null) {
+            throw new RuntimeException("Jogo não encontrado");
         }
 
-        // criar comentário
+        List<Comentario> listaComentario =
+                (List<Comentario>) getServletContext().getAttribute("comentarios");
+
+        if (listaComentario == null) {
+            listaComentario = new ArrayList<>();
+        }
+
         Comentario c = new Comentario(texto, usuario, jogoSelecionado);
 
-        listaComentario.add(c); // adiciona o comentario na lista
+        listaComentario.add(c);
 
         getServletContext().setAttribute("comentarios", listaComentario);
 
