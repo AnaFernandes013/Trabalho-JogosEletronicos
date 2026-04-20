@@ -5,6 +5,7 @@
 %><c:import url="/includes/headerLogin.jsp"/><%
 } else {
 %><c:import url="/includes/header.jsp"/><%}%>
+<link rel="stylesheet" href="./css/cadastro.css">
 <div class="container">
     <h3 class="text-center mb-4">Cadastro de jogos</h3>
 
