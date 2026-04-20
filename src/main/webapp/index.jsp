@@ -103,30 +103,28 @@
             </div>
 
         </c:if>
+        <c:forEach var="j" items="${not empty param.termo ? resultados : lista}">
+            <div class="row">
+                <h3>Todos os jogos</h3>
+                    <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
 
-        <div class="row">
-            <h3>Todos os jogos</h3>
+                        <div class="card h-100">
+                            <img src="imagens/${j.capa}" class="card-img-top" alt="Capa do jogo">
 
-            <c:forEach var="j" items="${not empty param.termo ? resultados : lista}">
-                <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">${j.titulo}</h5>
+                                <p class="card-text text-white texto">${j.sinopse}</p>
 
-                    <div class="card h-100">
-                        <img src="imagens/${j.capa}" class="card-img-top" alt="Capa do jogo">
-
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">${j.titulo}</h5>
-                            <p class="card-text text-white texto">${j.sinopse}</p>
-
-                            <form action="ver_jogo" method="get">
-                                <input type="hidden" name="id" value="${j.id}">
-                                <button type="submit" class="btn btn-primary mt-auto">Veja mais</button>
-                            </form>
+                                <form action="ver_jogo" method="get">
+                                    <input type="hidden" name="id" value="${j.id}">
+                                    <button type="submit" class="btn btn-primary mt-auto">Veja mais</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
 
-                </div>
-            </c:forEach>
-        </div>
+                    </div>
+            </div>
+        </c:forEach>
 
         <c:if test="${not empty param.termo}">
             <a href="index.jsp" class="btn btn-secondary mt-3">Limpar busca</a>

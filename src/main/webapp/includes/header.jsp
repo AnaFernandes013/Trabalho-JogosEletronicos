@@ -8,6 +8,7 @@
       <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
      <link rel="stylesheet" href="./css/estilos.css">
+      <link rel="stylesheet" href="./css/cadastro.css">
   </head>
 <body>
 
